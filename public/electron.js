@@ -2,12 +2,20 @@
 let electron = require('electron');
 let path = require('path');
 let isDev = require('electron-is-dev');
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, ipcRenderer } = electron;
 
 let mainWindow;
 
 const createWindow = () => {
-    mainWindow = new BrowserWindow({width: 900, height: 680});
+    mainWindow = new BrowserWindow(
+        { 
+            width: 900,
+            height: 680,
+            webPreferences: {
+                nodeIntegration: true,
+            }
+        },
+        );
     mainWindow.loadURL(isDev? 'http://localhost:3000': `file://${path.join(__dirname, '../build/index.html')}`)
 
     mainWindow.on('close', () => {

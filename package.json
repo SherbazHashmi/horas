@@ -4,6 +4,8 @@
   "private": true,
   "main": "public/electron.js",
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -11,6 +13,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "shards-react": "^1.0.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -19,7 +22,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev-windows": "concurrently \"set BROWSER=none &&npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "dev": "concurrently \"BROWSER=none &&npm start\" \"wait-on http://localhost:3000 && electron .\""
+    "dev": "concurrently \"BROWSER=none &&npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "build --em.main=build/electron.js",
+    "preelectron-pack": "npm build"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +49,15 @@
     "electron": "^13.1.4",
     "electron-builder": "^22.11.7",
     "wait-on": "^6.0.0"
+  },
+  "build": {
+    "appId": "com.example.electron-cra",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   }
 }
